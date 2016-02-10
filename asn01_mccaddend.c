@@ -14,17 +14,28 @@
 
 int get_words(const char prompt[], char word[], size_t n, const char eof[]);
 int get_int(const char prompt[], int min, int max, int eof);
+
 void print_menu();
+void display_all();
 
 
 int main(void) {
+  FILE *p;
 
-  print_menu();
-  
-  
+
+  int choice;
+  while(1){
+    print_menu();
+    /*get user choice*/  
+    if(choice==-2)
+      break;
+    if(choice==-1)
+      /* append record*/
+    if(choice==0)
+      display_all();
+  }
   return 0;
 }
-
 
 
 void print_menu(){
@@ -34,6 +45,15 @@ void print_menu(){
   printf("Display-All-----( 0)\n");
   printf("Modify-Record-n-( n)\n");
 }
+
+
+
+
+display_all(){
+
+}
+
+
 
 
 
@@ -99,6 +119,4 @@ int get_int(const char prompt[], int min, int max, int eof) {
   }
   return eof;
 }
-
-
 
