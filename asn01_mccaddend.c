@@ -22,19 +22,18 @@ void modify(int n);
 void append();
 
 
-int main(void) {
+int main(int argc, char *argv[]) {
   
-  FILE *fp;
+  FILE *p;
 
-  if((fp = fopen("in1", "r+")) == 0)
-    perror("fopen");
+  if((p = fopen(argv[1], "w")) == 0)
+    perror("Failed to open file.");
 
-  fprintf(fp, "This is testing for fprintf...\n");
-  fputs("This is testing for fputs...\n", fp);
+  fprintf(p, "This is testing for fprintf...\n");
+  fputs("This is testing fasdfasdfor fputs...\n", p);
 
-  printf("test");
   
-  fclose(fp);
+  fclose(p);
 
 
   /*int choice;
