@@ -16,28 +16,77 @@ int get_words(const char prompt[], char word[], size_t n, const char eof[]);
 int get_int(const char prompt[], int min, int max, int eof);
 
 void print_menu();
-void display_all();
+void display_all(FILE *f);
+
+void modify(int n);
+void append();
 
 
 int main(void) {
-  FILE *p;
+  
+  FILE *fp;
+
+  if((fp = fopen("in1", "r+")) == 0)
+    perror("fopen");
+
+  fprintf(fp, "This is testing for fprintf...\n");
+  fputs("This is testing for fputs...\n", fp);
+
+  printf("test");
+  
+  fclose(fp);
 
 
-  int choice;
+  /*int choice;
+  char prompt[] = {"Input Choice:"};
+  char word[] = {};
+
   while(1){
+    choice = -3;
     print_menu();
-    /*get user choice*/  
-    if(choice==-2)
+    
+    choice = get_int(prompt, word,);
+    if(choice == -2)
       break;
-    if(choice==-1)
-      /* append record*/
-    if(choice==0)
+    if(choice == -1)
+      append();
+    if(choice == 0)
       display_all();
+    if(choice > 0)
+      modify(choice);
   }
+  */
   return 0;
 }
 
 
+
+
+
+
+
+
+
+/*
+ * 
+ */
+void squeeze_spaces (void) {
+  int c;
+  while ((c = getchar()) != EOF){
+    if (c == ' '){
+      while ((c = getchar()) == ' ')
+        ;
+      printf(" ");
+    }
+    putchar(c);
+  }
+}
+
+
+
+/*
+ * Prints a basic menu.
+ */
 void print_menu(){
   printf("--------Menu--------\n");
   printf("Quit------------(-2)\n");
@@ -47,19 +96,17 @@ void print_menu(){
 }
 
 
-
-
-display_all(){
+void display_all(FILE *f){
 
 }
 
+void modify(int n){
 
+}
 
+void append(){
 
-
-
-
-
+}
 
 
 
@@ -67,7 +114,6 @@ display_all(){
  * otherwise returns 0 on end of file or when the user inputs the word specified
  * by eof 
  */
- 
 int get_words (const char prompt[], char word[], size_t n, const char eof[]) {
   char line[LINESIZE];
 
@@ -90,8 +136,6 @@ int get_words (const char prompt[], char word[], size_t n, const char eof[]) {
   }
   return 0;
 }
-
-
 
 
 /* if an interger between min and max inclusive is sucessfuly read, it is 
