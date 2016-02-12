@@ -14,47 +14,50 @@
 
 int get_words(const char prompt[], char word[], size_t n, const char eof[]);
 int get_int(const char prompt[], int min, int max, int eof);
-
 void print_menu();
 void display_all(FILE *f);
-
 void modify(int n);
-void append();
+void append(); 
 
 
 int main(int argc, char *argv[]) {
   
-  FILE *p;
+  FILE *fp;
+  int *record = 0;
+  int choice;
+  char prompt[] = "Input Choice:";
+  char word[] = "";
 
-  if((p = fopen(argv[1], "w")) == 0)
+  if((fp = fopen(argv[1], "w")) == 0){
     perror("Failed to open file.");
-
-  fprintf(p, "This is testing for fprintf...\n");
-  fputs("This is testing fasdfasdfor fputs...\n", p);
-
-  
-  fclose(p);
-
-
-  /*int choice;
-  char prompt[] = {"Input Choice:"};
-  char word[] = {};
+    return 1;
+  }
 
   while(1){
     choice = -3;
     print_menu();
     
-    choice = get_int(prompt, word,);
+    choice = get_int(prompt, -1, 100, -2);
+
     if(choice == -2)
       break;
-    if(choice == -1)
-      append();
-    if(choice == 0)
-      display_all();
-    if(choice > 0)
-      modify(choice);
+    else if(choice == -1)
+      append(fp);
+    else if(choice == 0)
+      ;
+      /*display_all();*/
+    else if(choice > 0)
+      ;
+      /*modify(choice);*/
+    else
+      ;
   }
-  */
+
+
+
+  
+  fclose(fp);
+
   return 0;
 }
 
@@ -103,9 +106,45 @@ void modify(int n){
 
 }
 
-void append(){
+
+
+
+void append(FILE *fp){
+  char prompt[] = "Input Choice:";
+  char stn[20];
+
+
+  get_stn(&fp, &stn);
+
+  fprintf(fp, "stuff\n");
 
 }
+
+
+int get_stn(FILE *fp, char *stn[]){
+  char line;
+
+  fgets(stn, LINESIZE, fp);
+  while(1){
+    printf("Enter StudentNumber: ");
+    scanf("a%d", &stn[0], &stn[1]);
+  }
+}
+
+
+
+
+
+char wait_char(char c){
+  while ((c = getchar()) != EOF){
+    if (c == 'a'){
+      return 1;
+    }
+  }
+}
+
+
+
 
 
 
@@ -143,7 +182,6 @@ int get_words (const char prompt[], char word[], size_t n, const char eof[]) {
  * precondition: (min <= max) && (eof < min || eof > max)  
  */
 int get_int(const char prompt[], int min, int max, int eof) {
-  #define LINESIZE 1024
   char line[LINESIZE];
   int n;
   while(1){
