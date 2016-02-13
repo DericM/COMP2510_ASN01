@@ -15,20 +15,20 @@
 int get_words(const char prompt[], char word[], size_t n, const char eof[]);
 int get_int(const char prompt[], int min, int max, int eof);
 void print_menu();
-void display_all(FILE *f);
-void modify(int n);
-void append(); 
+void display_all();
+void modify();
+void append();
 
 
 int main(int argc, char *argv[]) {
   
   FILE *fp;
-  int *record = 0;
   int choice;
   char prompt[] = "Input Choice:";
-  char word[] = "";
+  char a;
+  int stn;
 
-  if((fp = fopen(argv[1], "w")) == 0){
+  if((fp = fopen(argv[argc-1], "w")) == 0){
     perror("Failed to open file.");
     return 1;
   }
@@ -36,21 +36,46 @@ int main(int argc, char *argv[]) {
   while(1){
     choice = -3;
     print_menu();
-    
     choice = get_int(prompt, -1, 100, -2);
 
     if(choice == -2)
       break;
-    else if(choice == -1)
-      append(fp);
+    
+    
+    else if(choice == -1) {
+      
+      printf("A00000000\n");
+      while(1){
+        
+        scanf("a", &a);
+        
+        
+        scanf("8%d", &stn)
+        
+        if(a == 'a'){
+          printf(" %c", a);
+        }
+        
+        
+        
+
+      }
+    }
+    
+    
+    
     else if(choice == 0)
       ;
       /*display_all();*/
+      
+      
     else if(choice > 0)
       ;
       /*modify(choice);*/
-    else
-      ;
+      
+      
+      
+    else {}
   }
 
 
@@ -98,17 +123,17 @@ void print_menu(){
 }
 
 
-void display_all(FILE *f){
+void display_all(){
 
 }
 
-void modify(int n){
+void modify(){
 
 }
 
 
 
-
+/*
 void append(FILE *fp){
   char prompt[] = "Input Choice:";
   char stn[20];
@@ -119,29 +144,8 @@ void append(FILE *fp){
   fprintf(fp, "stuff\n");
 
 }
+*/
 
-
-int get_stn(FILE *fp, char *stn[]){
-  char line;
-
-  fgets(stn, LINESIZE, fp);
-  while(1){
-    printf("Enter StudentNumber: ");
-    scanf("a%d", &stn[0], &stn[1]);
-  }
-}
-
-
-
-
-
-char wait_char(char c){
-  while ((c = getchar()) != EOF){
-    if (c == 'a'){
-      return 1;
-    }
-  }
-}
 
 
 
