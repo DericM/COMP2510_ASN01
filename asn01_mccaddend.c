@@ -9,146 +9,38 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 #define LINESIZE 1024
 #define CHECK(PRED) printf("%s ... %s\n",(PRED) ? "passed" : "FAILED", #PRED)
 
 int get_words(const char prompt[], char word[], size_t n, const char eof[]);
 int get_int(const char prompt[], int min, int max, int eof);
 void print_menu();
-void display_all();
-void modify();
-void append();
-
+void new_record(FILE *fp, int c);
+void get_stid(char *stid);
 
 int main(int argc, char *argv[]) {
   
   FILE *fp;
-  int choice;
-  char prompt[] = "Input Choice:";
-  char a;
-  int stn;
-
-  if((fp = fopen(argv[argc-1], "w")) == 0){
-    perror("Failed to open file.");
-    return 1;
-  }
-
-  while(1){
-    choice = -3;
-    print_menu();
-    choice = get_int(prompt, -1, 100, -2);
-
-    if(choice == -2)
-      break;
-    
-    
-    else if(choice == -1) {
-      
-      printf("A00000000\n");
-      while(1){
-        
-        scanf("a", &a);
-        
-        
-        scanf("8%d", &stn)
-        
-        if(a == 'a'){
-          printf(" %c", a);
-        }
-        
-        
-        
-
-      }
-    }
-    
-    
-    
-    else if(choice == 0)
-      ;
-      /*display_all();*/
-      
-      
-    else if(choice > 0)
-      ;
-      /*modify(choice);*/
-      
-      
-      
-    else {}
-  }
 
 
 
   
-  fclose(fp);
+
 
   return 0;
 }
 
 
-
-
-
-
-
-
-
-/*
- * 
- */
-void squeeze_spaces (void) {
-  int c;
-  while ((c = getchar()) != EOF){
-    if (c == ' '){
-      while ((c = getchar()) == ' ')
-        ;
-      printf(" ");
-    }
-    putchar(c);
-  }
-}
-
-
-
-/*
- * Prints a basic menu.
+/* prints a simple menu
  */
 void print_menu(){
   printf("--------Menu--------\n");
   printf("Quit------------(-2)\n");
   printf("Append----------(-1)\n");
   printf("Display-All-----( 0)\n");
-  printf("Modify-Record-n-( n)\n");
+  printf("Modify-Record-n-( n)\n\n");
 }
-
-
-void display_all(){
-
-}
-
-void modify(){
-
-}
-
-
-
-/*
-void append(FILE *fp){
-  char prompt[] = "Input Choice:";
-  char stn[20];
-
-
-  get_stn(&fp, &stn);
-
-  fprintf(fp, "stuff\n");
-
-}
-*/
-
-
-
-
 
 
 
@@ -194,7 +86,7 @@ int get_int(const char prompt[], int min, int max, int eof) {
       clearerr(stdin);
       break;
     }
-    if (sscanf(line, "%d", &n) == 1){
+    if (sscanf(line, " %d", &n) == 1){
       if(min <= n && n <= max){
         return n;
       } else {
