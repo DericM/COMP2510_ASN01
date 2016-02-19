@@ -1,11 +1,22 @@
-// COMP2510_ASN01.cpp : Defines the entry point for the console application.
-//
+/*
+File:	COMP2510_ANS01.c
+Author: Deric Mccadden
+Date:	2016/02/16
+*/
 
 #include "stdafx.h"
 
 
-int main()
-{
+int main(int argc, int *argv[]) {
+	FILE *fp;
+	if (argc != 2) {
+		perror("usage: %s {spource-file} {destination-file}\n");
+		exit(1);
+	}
+
+
+
+
     return 0;
 }
 
