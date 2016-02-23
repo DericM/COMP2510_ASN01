@@ -20,6 +20,7 @@ int get_id(char entry[]);
 int get_grade();
 void new_record(FILE *fp);
 
+/*
 int main(int argc, char *argv[]) {
    FILE *fp; 
    if (argc != 2) { 
@@ -38,6 +39,7 @@ int main(int argc, char *argv[]) {
    }
    return 0;
 }
+*/
 
 void displaySelection() {
    printf("-2\tquit\n");
